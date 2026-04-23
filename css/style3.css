@@ -1,6 +1,7 @@
 @charset "utf-8"
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+/* 폰트는 몇개를 쓰든 어디에 쓰든 우선 이곳에 붙이기 그리고나서 쓸 곳에 폰트패밀리로 적용하기*/
 
 body {
   font-family: "Noto Sans", sans-serif;
@@ -8,12 +9,17 @@ body {
   color: #121212;
 }
 
+a {
+  text-decoration: none;
+  /* 메뉴 세단어 밑줄 사라짐 */
+}
+
 .ffJosefin {
   font-family: "Josefin Sans", sans-serif;
 }
 
 .innerWrap {
-  border: 4px solid lightblue;
+  /* border: 4px solid lightblue; */
   width: 1240px;
   margin: 0 auto;
   padding: 80px 20px 0;
@@ -23,5 +29,123 @@ main h2 {
   text-align: center;
   font-size: 60px;
   letter-spacing: 0.05em;
+  /* 통상 0.04em ~ 0.12em 이 사용됨 */
   margin-bottom: 80px;
 }
+
+header {
+  background: url(../assets/hero.jpg) no-repeat right center/cover;
+  /* no-repeat 반복되지 않게 해줌 + 이미지가 하나만 보여도
+  큰 모니터에선 반복 될 수 있으니 꼭 넣어주세요 */
+  /* 이미지가 좌측은 비어있고 우측엔 이미지가 있어서 우측 정렬시키고 cover로 늘림 */
+  /* cover 웹브라우저 꽉 채우기,
+  이미지에 따라 달라요(좌우측이 비어있는 이미지는 괜찮아요)*/
+}
+
+header .innerWrap {
+  height: 720px;
+  /* 위 이미지 높이에 맞춰 늘렸음 */
+  position: relative;
+  /* 기준점으로 설정됨 */
+}
+
+header .scroll {
+  position: absolute;
+  /* 절대값으로 설정함 */
+  left: 0;
+  bottom: 0;
+  /* 왼쪽 가장 하단 */
+  width: 100%;
+  /* absolute는 블럭의 성질을 잃어버리기 때문에(인라인이 됨)
+  width 100%를 줘서 웹브라우저를 꽉 채움 */
+  text-align: center;
+  font-size: 16px;
+}
+
+header .scroll img {
+  margin-top: 8px;
+}
+
+header nav {
+  position: fixed;
+  /* 웹브라우저 기준으로 위치가 고정됨 */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* fixed는 블럭의 성질을 잃어버리기 때문에(인라인이 됨)
+  width 100%를 줘서 웹브라우저를 꽉 채움 */
+  z-index: 100;
+}
+
+header nav ul {
+  /* div는 의미없는 박스라서 경로에서 빼고 입력 */
+  display: flex;
+  width: 1240px;
+  margin: 0 auto;
+  /* 가운데 정렬값 */
+  padding: 10px 20px;
+  justify-content: space-around;
+  /* space-around 양쪽이 끝이 안으로 들어와서 정렬됨
+  space-between은 양쪽 끝이 끝에 붙고 정렬됨 */
+  list-style: none;
+  /* 메뉴 세단어 기호 없애기 */
+}
+
+header nav ul li a:hover {
+  /* :hover 마우스 올리면 나타나는 효과
+  li안에 a태그 문자 부분에 마우스 올리면 나타나야 하는 상황
+  그래서 a에 :hover 붙임 */
+  text-decoration: underline;
+  /* a태그 문자 위에 마우스 올리면 밑줄 생김 */
+}
+
+.msgSec {
+  background-color: #fbfaf7;
+}
+
+.msgSec p {
+  text-align: center;
+  line-height: 1.75;
+  /* '글자한정'
+  단위가 없을 경우 - 웹브라우저의 기본 글자 크기의 x1.75
+  웹브라우저 기본 폰트 크기 16pt(pc기준)
+  ex) 16x1.75=28
+  문장 사이 1은 기본 높이, 1.75배 높여라 */
+  margin-bottom: 40px;
+}
+
+.msgSec p.illust {
+  /* .은 띄우지 않고 바로 붙이기 / .사이를 띄면 원하는 영역 선택이 안됨
+  ex) p아빠, illust자식 = 아빠가 가지고 있는 것 중에서 지정한 자식이다
+  자식은 이미 만들어져 있다
+  p안에 들어있는 것 중에 이미 만들어져 있는 illust */
+  margin-top: 80px;
+  margin-bottom: 0;
+  position: relative;
+}
+
+/* 위에서 포지션 릴레이티브를 걸었기에 이미지가 기준이 됨
+웹브라우저는 왼쪽(비포)~오른쪽(애프터) */
+.msgSec p.illust::before {
+  /* 이미지 기준 왼쪽 부분 */
+  content: url(../assets/deco_left.png);
+  position: absolute;
+  /* 위에서 릴레이티브 사용했으니 앱솔루트 걸어주기 */
+  left: 320px;
+  bottom: -30px;
+}
+
+.msgSec p.illust::after {
+  /* 이미지 기준 오른쪽 부분 */
+  content: url(../assets/deco_right.png);
+  position: absolute;
+  right: 320px;
+  bottom: -30px;
+}
+
+.dateSec {
+  background-color: #ffffff;
+  padding-bottom: 120px;
+}
+
+/* 미완성 css 입니다 */
